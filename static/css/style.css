@@ -1,0 +1,295 @@
+*:before,
+
+*:after {
+
+    box-sizing: border-box;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+body {
+
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+
+    background:aliceblue;
+
+}
+
+.Logo1{
+    position:absolute;
+    top:-70px;
+    left:50px;
+    width:70px;
+} 
+
+.jio-logo{
+    float:right;
+    padding:30px;
+    padding-top:1px;
+    margin-top: -30px;
+
+}
+ 
+.jio-products{
+    position: absolute;
+    top: 0;
+    left:-5px;
+    width: 372px;
+    height: 572px;
+    padding-bottom: 30px;
+}
+
+ .cont {
+
+    border-radius: 20px;
+
+    overflow: hidden; 
+
+    position: relative;
+
+   
+    width: 960px;
+    
+    height: 550px;
+    padding-bottom: 50px;
+    top:20px;
+    margin: 0 auto 100px;
+
+    background:#0f7cc9;
+    
+    box-shadow: 10px 10px 40px rgba(255, 255, 255, 0.3), 10px 10px 15px rgba(70, 70, 70, 0.15), inset -10px -10px 15px rgba(255, 255, 255, 0.3), inset 10px 10px 15px rgba(70, 70, 70, 0.15); 
+
+    }
+
+.form {
+
+    position: relative;
+
+    width: 640px;
+
+    height: 100%;
+    top:85px;
+    right:30px;
+    -webkit-transition: -webkit-transform 1.2s ease-in-out;
+
+    transition: -webkit-transform 1.2s ease-in-out;
+
+    transition: transform 1.2s ease-in-out;
+
+    transition: transform 1.2s ease-in-out, -webkit-transform 1.2s ease-in-out;
+
+    padding: 50px 30px 0;
+    
+
+}
+
+.title{
+    left:10px;
+}
+.sub-cont {
+
+
+    position: absolute;
+
+    left: 600px;
+
+    top: 0;
+
+    width: 900px;
+
+    height: 100%;
+
+    padding-left: 260px;
+
+    -webkit-transition: -webkit-transform 1.2s ease-in-out;
+
+    transition: -webkit-transform 1.2s ease-in-out;
+
+    transition: transform 1.2s ease-in-out;
+
+    transition: transform 1.2s ease-in-out, -webkit-transform 1.2s ease-in-out;
+    background-color:white;
+    border-radius: 10px;
+
+} 
+.cont.s--signup .sub-cont {
+
+    -webkit-transform: translate3d(-640px, 0, 0);
+
+    transform: translate3d(-640px, 0, 0);
+
+}
+
+button {
+
+    display: block;
+
+    margin: 0 auto;
+
+    width: 260px;
+
+    height: 36px;
+
+    border-radius: 30px;
+
+    color: #fff;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+}
+
+ .img:before {
+
+    content: '';
+
+    position: absolute;
+    top: 0;
+    left:-50px;
+    width: 372px;
+    height: 650px;
+    opacity: .8;
+}
+
+.img__text {
+
+    z-index: 2;
+
+    position: absolute;
+
+    left: 0;
+
+    top: 35px;
+
+    width: 100%;
+
+    padding: 0 20px;
+
+    text-align: center;
+
+    color: #fff;
+
+    -webkit-transition: -webkit-transform 1.2s ease-in-out;
+
+    transition: -webkit-transform 1.2s ease-in-out;
+
+    transition: transform 1.2s ease-in-out;
+
+    transition: transform 1.2s ease-in-out, -webkit-transform 1.2s ease-in-out;
+
+}
+
+h2 {
+
+    width: 100%;
+
+    font-size: 26px;
+
+    margin-left: 37.5%;
+
+}
+
+label {
+
+    display: block;
+
+    width: 260px;
+
+    margin: 25px auto 0;
+
+    text-align: center;
+
+}
+
+input {
+
+    display: block;
+
+    width: 100%;
+
+    margin-top: 5px;
+
+    padding-bottom: 5px;
+
+    font-size: 16px;
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+
+    text-align: center;
+
+}
+
+input[type=text], input[type=password] , select  {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  margin-left:130px;
+  display: inline-block;
+  border: 1px solid #5c5c5c;
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 10px;
+  
+  
+}
+.dropdown{
+   text-align: center;
+   font-size: medium;
+   color:gray;
+} 
+
+button {
+  background-color:darkslategray;
+  color: white;
+  padding: 12px 20px;
+  margin: 15px 0;
+  border: none;
+  cursor: pointer;
+  width: 25%;
+  height:15%;
+  margin-left:200px;
+
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.container {
+  padding: 10px;
+}
+
+.icon{
+    position: relative;
+}
+.icon i{
+    position:absolute;
+    left:65%;
+    top:18px;
+    font-size: 24px;
+
+}
+
+.password{
+    position: relative;
+}
+
+.password i{
+    position:absolute;
+    left:65%;
+    top:18px;
+    font-size: 24px;
+
+}
+
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  
+}

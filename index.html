@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Style for side hamburger menu */
+    .menu-container {
+      position: absolute;
+      left: 0;
+      top: 0.3px;
+      height: 150%;
+      width: 0;
+      z-index: 9999;
+      overflow-x: hidden;
+      transition: 0.5s;
+      background-color: #333;
+      padding-top: 60px;
+      font-family: 'Times New Roman', Times, serif;
+    
+    }
+
+
+    .menu-container a {
+      display: block;
+      color: white;
+      padding: 8px 16px;
+      font-size: 20px;
+      position: relative;
+      margin-bottom: 20px;
+      text-decoration: none;
+    }
+
+    .menu-container a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+
+    .menu-container .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+    }
+
+    /* Style for logout button */
+    .logout-btn {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+    }
+
+    /* Style for sliding carousel banners */
+    .slideshow-container {
+      max-width: 97%;
+      position: relative;
+      margin: auto;
+      bottom: 8.5px;
+      right: 43px;
+    }
+
+    .slide {
+      display: none;
+    }
+
+    nav {
+      background-color: blue;
+      color: #fff;
+      height: 60px;
+      position: relative;
+      top: -9px;
+      right: 7.62px;
+      width: 101%;
+    }
+
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline-block;
+      position: relative;
+      left: 90%;
+      top: 5px;
+    }
+
+    nav ul li a {
+      display: block;
+      padding: 10px 20px;
+      color: #fff;
+      font-size: 25px;
+      text-decoration: none;
+    }
+
+    nav ul li a:hover {
+      background-color: #555;
+    }
+
+    .hamburger {
+      position: absolute;
+      top: 8px;
+      left: 15px;
+      font-weight: 20px;
+      color: #fff;
+      
+    }
+
+    .dropdown-container {
+      display: none;
+      background-color: #262626;
+      padding-left: 8px;
+      
+    }
+
+    .active {
+      background-color: green;
+      color: white;
+    }
+
+    .sidenav a:hover,
+    .dropdown-btn:hover {
+      color: #f1f1f1;
+    }
+
+    .main {
+      margin-left: 200px;
+      /* Same as the width of the sidenav */
+      font-size: 20px;
+      /* Increased text to enable scrolling */
+      padding: 0px 10px;
+    }
+
+    .dropdown-btn {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      font-size: 20px;
+      color: #818181;
+      display: block;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .fa-caret-down {
+      float: right;
+      padding-right: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="#">Logout</a></li>
+    </ul>
+  </nav>
+  <!-- Side hamburger menu -->
+  <div id="mySidenav" class="menu-container">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#" target="_blank">Jio.com</a>
+    <button class="dropdown-btn">Weekly reports >
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+      <a href="Reports\26-06-2023\Final-Report.html" target="_blank">26-06-2023</a>
+      <a href="Reports\27-06-2023\Final-Report.html" target="_blank">27-06-2023</a>
+      <a href="Reports\28-06-2023\Jio.com_metrics-report28th-June.html" target="_blank">28-06-2023</a>
+      <a href="#" target="_blank">29-06-2023</a>
+      <a href="#" target="_blank">30-06-2023</a>
+    </div>
+    <a href="#" >Jio Games</a>
+    <a href="#" >DAM</a>
+    <a href="#" >MP Corner</a>
+    <a href="#" >My Jio</a>
+  </div>
+
+
+
+  <!-- Hamburger menu button -->
+  <span style="font-size:30px;cursor:pointer" class="hamburger" onclick="openNav()">&#9776;</span>
+  
+  <!-- Sliding carousel banners -->
+  <div class="slideshow-container">
+    <div class="slide">
+      <img
+        src="https://media.istockphoto.com/photos/business-technology-internet-and-network-concept-digital-marketing-picture-id1208690325?k=6&m=1208690325&s=170667a&w=0&h=pOeE7bM4jPdaMj64HFW0pIcUY0jsWvaeYcLuWXhlrgw="
+        style="height:600px;width:105%;object-fit: cover;" alt="Automation">
+    </div>
+    <div class="slide">
+      <img src="https://linkconsulting.com/wp-content/uploads/2019/05/img-RPA-1.jpg"
+        style="height:70%;width:105%;object-fit: cover;" alt="robot">
+    </div>
+    <div class="slide">
+      <img src="https://i.pinimg.com/originals/fb/07/0a/fb070abd9f4a4af3935b5a33df0e0f9a.jpg"
+        style="height:600px;width:105%;object-fit: cover;" alt="Banner 3">
+    </div>
+  </div>
+
+
+  <!DOCTYPE html>
+  <html>
+
+  <head>
+    <title>Trends Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      canvas {
+        display: block;
+        position: relative;
+        top: 90px;
+        left: 40px;
+        margin: 0 auto;
+      }
+
+      .data {
+        position: relative;
+        bottom: 180px;
+        left: 40%;
+        padding: auto;
+        font-size: 25px;
+
+      }
+
+      .updatechart {
+        position: relative;
+        bottom: 185px;
+        left: 42%;
+        background-color: cornflowerblue;
+        padding: auto;
+        font-size: 20px;
+        padding: 3px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 5px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="trendsChart" width="400" height="200"></canvas>
+    <div>
+      <label class="data">
+        <input type="radio" name="interval" value="7" checked>7 Days
+      </label>
+      <label class="data">
+        <input type="radio" name="interval" value="15">15 Days
+      </label>
+      <label class="data">
+        <input type="radio" name="interval" value="30">30 Days
+      </label>
+      <button class="updatechart" onclick="updateChart()">Update Chart</button>
+    </div>
+
+    <script>
+      // Sample data
+      const trendsData = [
+        { date: '2023-06-01', value: 10 },
+        { date: '2023-06-02', value: 20 },
+        { date: '2023-06-03', value: 30 },
+        { date: '2023-06-04', value: 25 },
+        { date: '2023-06-05', value: 15 },
+        { date: '2023-06-06', value: 35 },
+        { date: '2023-06-07', value: 45 },
+        { date: '2023-06-08', value: 50 },
+        { date: '2023-06-09', value: 40 },
+        { date: '2023-06-10', value: 30 },
+        { date: '2023-06-11', value: 20 },
+        { date: '2023-06-12', value: 35 },
+        { date: '2023-06-13', value: 42 },
+        { date: '2023-06-14', value: 38 },
+        { date: '2023-06-15', value: 52 },
+        { date: '2023-06-16', value: 47 },
+      ];
+
+      let selectedInterval = '7';
+
+      // Chart configuration
+      const config = {
+        type: 'line',
+        data: {
+          labels: [],
+          datasets: [{
+            label: 'Trends',
+            data: [],
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {}
+      };
+
+      const trendsChart = new Chart(document.getElementById('trendsChart'), config);
+
+      // Function to update the chart based on the selected interval
+      function updateChart() {
+        const filteredData = trendsData.slice(-selectedInterval);
+        const labels = filteredData.map(data => data.date);
+        const values = filteredData.map(data => data.value);
+
+        trendsChart.data.labels = labels;
+        trendsChart.data.datasets[0].data = values;
+        trendsChart.update();
+      }
+
+      // Event listener for interval selection
+      const intervalRadios = document.getElementsByName('interval');
+      intervalRadios.forEach(radio => {
+        radio.addEventListener('change', (event) => {
+          selectedInterval = event.target.value;
+        });
+      });
+    </script>
+
+    <script>
+
+      function showSlides() {
+        var slides = document.getElementsByClassName("slide");
+        for (var i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {
+          slideIndex = 1;
+        }
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 2000); // Change slide every 2 seconds
+      }
+
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+      }
+
+      // Close side hamburger menu
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+      }
+
+      // Sliding carousel banners
+      var slideIndex = 0;
+      showSlides();
+
+
+      var dropdown = document.getElementsByClassName("dropdown-btn");
+      var i;
+
+      for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          var dropdownContent = this.nextElementSibling;
+          if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+          } else {
+            dropdownContent.style.display = "block";
+          }
+        });
+      }
+    </script>
+
+  </body>
+
+  </html>

@@ -1,0 +1,1023 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="https://jep-asset.akamaized.net/jiostaticresources/v02/images/favicon.ico" type="image/x-icon">
+  <title>Jio.com Report</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+  <link href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+  <style>
+    body {
+      padding-top: 70px;
+      font-family: -apple-system, sans-serif;
+      background-color: #eeeeee;
+      background-image: url('https://pbs.twimg.com/ext_tw_video_thumb/1526534776274190336/pu/img/47JUsgHetvjps2em.jpg'); 
+      rotate:url('https://pbs.twimg.com/ext_tw_video_thumb/1526534776274190336/pu/img/47JUsgHetvjps2em.jpg') 180deg;
+      backdrop-filter: blur(8px);
+      /*  -webkit-filter: blur(8px);  */
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-size: 120%;
+      background-position: center;
+      background-blend-mode: inherit;
+    }
+
+    #navbar-brand-img{
+      border-radius: 2px;
+      padding-bottom:  10px;
+      height:100px;
+      width:100px;
+    }
+    ul.navbar-default {
+      background-color:#0c2872;
+      color:black;
+      
+    }
+    .tablecard {
+      background-color: white;
+      font-size: 14px;
+      
+      /* border: 1px outset gray;
+        box-shadow: inset 0 3px 6px rgba(0,0,0,0.16), 0 4px 6px rgba(0,0,0,0.45); */
+    }
+
+    th,
+    td {
+      text-align: center;
+    }
+
+    .dt-buttons {
+      margin-left: 5px;
+    }
+
+    .row {
+      padding: 5px;
+    }
+
+    .rowcard {
+      padding: 10px;
+      border-radius: 15px;
+      background-color: white;
+      border: 1px outset gray;
+      box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.16), 0 4px 6px rgba(0, 0, 0, 0.45);
+    }
+
+    .card-header {
+      font-weight: bold;
+      color: gray;
+      padding-left: 5px;
+      font-size: large;
+    }
+
+    .card-table {
+      width: 100%;
+    }
+
+    .ecard-table {
+      width: 100%;
+    }
+
+    .ecard-table tr {
+      height: 35px;
+      padding-left: 5px;
+    }
+
+    .ecard-table tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .card-table tr {
+      height: 25px;
+    }
+
+    .card-table td {
+      width: 50%;
+    }
+
+    .card-table tr:first-child {
+      font-size: 30px;
+    }
+
+    .card-table tr:last-child {
+      font-size: 10px;
+      color: gray;
+    }
+
+    .total {
+      color: brown;
+    }
+
+    .pass {
+      color: green;
+    }
+
+    .fail {
+      color: red;
+    }
+
+    .skip {
+      color: orange;
+    }
+
+    .loader {
+      position: fixed;
+      left: 0px;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      /* background: url('https://i.ibb.co/cXnKsNR/Cube-1s-200px.gif') 50% 50% no-repeat rgb(249, 249, 249); */
+      background: url('https://i.ibb.co/wR1s7Wq/giphy-1.gif') 50% 50% no-repeat rgb(249, 249, 249);
+
+    }
+
+    .hide {
+      display: none;
+    }
+
+    .tab {
+      overflow: hidden;
+      border: 1px #ccc;
+      background-color: #f1f1f1;
+      font-weight: bold;
+      color: #808080;
+      font-family: Arial;
+      /* padding-top: 15px ; */
+      border-top: 10%;
+      padding-bottom: 15px;
+      width: 743px;
+      position: relative;
+      left: 2px;
+      border-top-right-radius: 15px;
+      border-top-left-radius: 15px;
+      background-color: white;
+      border-bottom: 1px solid #000000;
+      font-size: large;
+    }
+    .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+    color: white;
+    }   
+    .dataTables_wrapper .dataTables_paginate .paginate_button, .dataTables_wrapper .dataTables_paginate .paginate_button, .dataTables_wrapper .dataTables_paginate{
+    color: white !important; 
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+    color: white  !important ;
+    }
+    option{
+      color:black
+    }
+
+    /* .linkstab{
+        position: relative;
+        left: 1px;
+      } */
+  </style>
+</head>
+
+<body>
+  <div class="loader"></div>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-default navbar-fixed-top" id="navbar-full">
+    <div class="container">
+      <div class="navbar-header">
+      <a id="navbar-brand-img" href="https://www.jio.com/" target="_blank" ><img src="https://jep-asset.akamaized.net/jiostaticresources/v02/images/favicon.ico"></img></a>
+      <!-- <a class="navbar-brand">Jio.com Report</a> -->
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="#" class="tablink" id="defaultOpen"
+              onclick="openPage('dashboard', this, '#9eb5fa')" style="color: #000000; font-weight:700;">Dashboard</a></li>
+          <li><a href="#" class="tablink"
+              onclick="openPage('suiteMetrics', this, '#9eb5fa'); executeDataTable('#sm',0);" style="color:rgb(0,0,0); font-weight:700;">Suite</a></li>
+          <li><a href="#" class="tablink"
+              onclick="openPage('testMetrics', this, '#9eb5fa'); executeDataTable('#tm',0);" style="color:rgb(0,0,0); font-weight:700;">Test</a></li>
+          <!-- <li class=""><a href="#" class="tablink" onclick="openPage('keywordMetrics', this, '#fc6666'); executeDataTable('#km',3)">Keyword</a></li> -->
+          <li class="hide"><a href="#" class="tablink"
+              onclick="openPage('keywordMetricsTime', this, '#fc6666'); executeDataTable('#kmt',1)">KW Times</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a><b>Timestamp:</b>08/06/23 13:06:15</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- Dashboard Data -->
+    <div class="tabcontent" id="dashboard">
+
+      <div class="row">
+
+        <div class="col-md-4">
+          <div class="col-md-12 rowcard">
+            <span class="card-header">Test Statistics:</span>
+            <div class="col-md-12">
+              <div id="testPie"></div>
+            </div>
+            <div class="col-md-12">
+              <table class="card-table">
+                <tr>
+                  <td class="total">195</td>
+                  <td class="pass">184</td>
+                </tr>
+                <tr>
+                  <td>Total</td>
+                  <td>Pass</td>
+                </tr>
+              </table>
+              <table class="card-table">
+                <tr>
+                  <td class="fail">11</td>
+                  <td class="skip">0</td>
+                </tr>
+                <tr>
+                  <td>Fail</td>
+                  <td>Skip</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-8 rowcard">
+          <div class="tab">
+            <span class="linkstab">Case Statistics:</span>
+          </div>
+          <table class="display tablecard dataTable no-footer">
+            <thead>
+              <tr>
+                <th>Module</th>
+                <th>Success(%)</th>
+                <th>Total</th>
+                <th>Pass</th>
+                <th>Fail</th>
+                <th>Skip</th>
+                <th>Time (m)</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              
+              <tr style="background-color:#aef3ad; font-weight: 700;color: black;">
+                <td data-toggle="tooltip" title=""
+                  onclick="openInNewTab('log.html#s1','#s1')"
+                  style="word-wrap: break-word;max-width: 250px; white-space: normal; cursor: pointer; color:blue; text-align: center;">
+                  Apps</td>
+                <td style="color: black;"> 94.36</td>
+                <td style="font-weight: 700">195</td>
+                <td style="color:#00a745; font-weight: 700; ">184</td>
+                <td style="color: red ;  font-weight: 700;">11</td>
+                <td style="color: orange;  font-weight: 700;">0</td>
+                <td style="font-weight: 700;">36.33</td>
+              </tr>
+
+              
+              
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <div class="row"></div>
+
+      
+
+      
+        <div class="col-md-4" align="center">
+          <div class="col-md-12 rowcard">
+            <span class="card-header">Apps</span>
+            <div class="col-md-12">
+              <div id="Apps"></div>
+            </div>
+          </div>
+        </div>
+        
+      
+
+      <div class="row"></div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="col-md-12 rowcard">
+            <span class="card-header">Top 5 Common Failures:</span>
+            <table class="ecard-table">
+              <tr>
+                <th>Error Message</th>
+                <th>Occurence</th>
+              </tr>
+              
+              
+              
+              
+              <tr>
+                <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">
+                  Element 'xpath=//div[@aria-label="JioCall"]//div[@class="j-card__image ratio-wide"]//img' not visible after 5 seconds.</td>
+                <td>1</td>
+              </tr>
+              
+              
+              
+              <tr>
+                <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">
+                  Get now != Get Now</td>
+                <td>1</td>
+              </tr>
+              
+              
+              
+              <tr>
+                <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">
+                  Keyword 'CSS Verification' failed after retrying for 30 seconds. The last error was: none solid rgb(255, 255, 255) != underline solid rgb(255, 255, 255)</td>
+                <td>1</td>
+              </tr>
+              
+              
+              
+              <tr>
+                <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">
+                  Several failures occurred:
+
+1) Element with locator 'xpath=//div[@class="j-accordion"]//div[@class="j-accordion-panel active"]//span' not found.
+
+2) Element 'xpath://div[@class="j-accordion"]//div[@class="j-accordion-panel active"]//span' not visible after 5 seconds.</td>
+                <td>1</td>
+              </tr>
+              
+              
+            </table>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="col-md-12 rowcard">
+            <span class="card-header">Execution Duration(m):</span>
+            <table class="ecard-table">
+              <tr>
+                <th>Type</th>
+                <th>Min</th>
+                <th>Max</th>
+                <th>Avg</th>
+              </tr>
+              <tr>
+                <td style="text-align: center;">Suite</td>
+                <td>36.33</td>
+                <td>36.33</td>
+                <td>36.33</td>
+              </tr>
+              <tr>
+                <td style="text-align: center;">Test</td>
+                <td>0.19</td>
+                <td>3.82</td>
+                <td>1.98</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Suite Data -->
+    <div class="tabcontent" id="suiteMetrics">
+      <table id="sm" class="display tablecard" style="width:100% ; ">
+        <thead>
+          <tr>
+            <th>Module</th>
+            <th>Sub-module</th>
+            <th>Success(%)</th>
+            <th>Total</th>
+            <th>Pass</th>
+            <th>Fail</th>
+            <th>Skip</th>
+            <th>Time (m)</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+           
+          
+          
+          <tr style="background-color:#aef3ad; font-weight: 700;color: black;">
+            <td>Apps</td>
+            <td data-toggle="tooltip" title="Apps"
+              onclick="openInNewTab('log.html#s1-s1','#s1-s1')"
+              style="word-wrap: break-word;max-width: 250px; white-space: normal; cursor: pointer; color:blue; text-align: center;">
+              Apps</td>
+            <td style="color:black"> 94.36</td>
+            <td style="font-weight: 700">195</td>
+            <td style="color: green">184</td>
+            <td style="color: red">11</td>
+            <td style="color: orange">0</td>
+            <td>36.33</td>
+            </tr>
+
+            
+           
+          
+          
+        </tbody>
+      </table>
+    </div>
+
+  <!-- Test Case Data -->
+  <div class="tabcontent" id="testMetrics">
+    <table id="tm" class="display tablecard" style="width:100%">
+      <thead>
+        <tr>
+          <th class="">Tags</th>
+          <!-- <th>Suite Name</th> --> 
+          <th>Test Case</th>
+          <!-- CHANGES MADE -->
+          <th>Status</th> 
+          <th>Time (s)</th>
+          <th>Message</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td class=""
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">[Apps_Home, test]
+          </td>
+          <!-- <td style="word-wrap: break-word;width: 250px; white-space: normal; text-align: center;"></td> -->
+          <td data-toggle="tooltip" title="Confirm the redirection to Apps page when clicked" 
+            onclick="openInNewTab('log.html#s1-s1-t1','#s1-s1-t1')"
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; cursor: pointer; color:blue; text-align: left;">
+            Confirm the redirection to Apps page when clicked</td>
+          
+          <td style="color: green"> PASS</td>
+          
+          <td>11.26</td>
+          <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;"></td>
+        </tr>
+        
+        <tr>
+          <td class=""
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">[Apps_Home]
+          </td>
+          <!-- <td style="word-wrap: break-word;width: 250px; white-space: normal; text-align: center;"></td> -->
+          <td data-toggle="tooltip" title="Confirm the layout of the Apps page" 
+            onclick="openInNewTab('log.html#s1-s1-t2','#s1-s1-t2')"
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; cursor: pointer; color:blue; text-align: left;">
+            Confirm the layout of the Apps page</td>
+          
+          <td style="color: green"> PASS</td>
+          
+          <td>18.03</td>
+          <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;"></td>
+        </tr>
+        
+        <tr>
+          <td class=""
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">[Ent, JioNews]
+          </td>
+          <!-- <td style="word-wrap: break-word;width: 250px; white-space: normal; text-align: center;"></td> -->
+          <td data-toggle="tooltip" title="Confirm UI Functionality of JioNews App" 
+            onclick="openInNewTab('log.html#s1-s1-t3','#s1-s1-t3')"
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; cursor: pointer; color:blue; text-align: left;">
+            Confirm UI Functionality of JioNews App</td>
+          
+          <td style="color: green"> PASS</td>
+          
+          <td>174.1</td>
+          <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;"></td>
+        </tr>
+        
+        <tr>
+          <td class=""
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">[MyJio]
+          </td>
+          <!-- <td style="word-wrap: break-word;width: 250px; white-space: normal; text-align: center;"></td> -->
+          <td data-toggle="tooltip" title="Confirm UI elements and Redirection of MyJio App Tile" 
+            onclick="openInNewTab('log.html#s1-s1-t4','#s1-s1-t4')"
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; cursor: pointer; color:blue; text-align: left;">
+            Confirm UI elements and Redirection of MyJio App Tile</td>
+          
+          <td style="color: green"> PASS</td>
+          
+          <td>144.67</td>
+          <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;"></td>
+        </tr>
+        
+        <tr>
+          <td class=""
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">[Ent, JioSaavn]
+          </td>
+          <!-- <td style="word-wrap: break-word;width: 250px; white-space: normal; text-align: center;"></td> -->
+          <td data-toggle="tooltip" title="Confirm UI Functionality of JioSaavn App" 
+            onclick="openInNewTab('log.html#s1-s1-t5','#s1-s1-t5')"
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; cursor: pointer; color:blue; text-align: left;">
+            Confirm UI Functionality of JioSaavn App</td>
+          
+          <td style="color: green"> PASS</td>
+          
+          <td>212.29</td>
+          <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;"></td>
+        </tr>
+        
+        <tr>
+          <td class=""
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">[Ent, JioTV]
+          </td>
+          <!-- <td style="word-wrap: break-word;width: 250px; white-space: normal; text-align: center;"></td> -->
+          <td data-toggle="tooltip" title="Confirm UI Functionality of JioTV App" 
+            onclick="openInNewTab('log.html#s1-s1-t6','#s1-s1-t6')"
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; cursor: pointer; color:blue; text-align: left;">
+            Confirm UI Functionality of JioTV App</td>
+          
+          <td style="color: green"> PASS</td>
+          
+          <td>131.06</td>
+          <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;"></td>
+        </tr>
+        
+        <tr>
+          <td class=""
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">[Ent, JioCinema]
+          </td>
+          <!-- <td style="word-wrap: break-word;width: 250px; white-space: normal; text-align: center;"></td> -->
+          <td data-toggle="tooltip" title="Confirm UI Functionality of JioCinema App" 
+            onclick="openInNewTab('log.html#s1-s1-t7','#s1-s1-t7')"
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; cursor: pointer; color:blue; text-align: left;">
+            Confirm UI Functionality of JioCinema App</td>
+          
+          <td style="color: red"> FAIL</td>
+          
+          <td>193.41</td>
+          <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">Keyword 'CSS Verification' failed after retrying for 30 seconds. The last error was: none solid rgb(255, 255, 255) != underline solid rgb(255, 255, 255)</td>
+        </tr>
+        
+        <tr>
+          <td class=""
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">[JioPosLite]
+          </td>
+          <!-- <td style="word-wrap: break-word;width: 250px; white-space: normal; text-align: center;"></td> -->
+          <td data-toggle="tooltip" title="Confirm UI elements and Redirection of JioPos Lite App Tile" 
+            onclick="openInNewTab('log.html#s1-s1-t8','#s1-s1-t8')"
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; cursor: pointer; color:blue; text-align: left;">
+            Confirm UI elements and Redirection of JioPos Lite App Tile</td>
+          
+          <td style="color: red"> FAIL</td>
+          
+          <td>11.73</td>
+          <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">Get now != Get Now</td>
+        </tr>
+        
+        <tr>
+          <td class=""
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">[JioHealthHub]
+          </td>
+          <!-- <td style="word-wrap: break-word;width: 250px; white-space: normal; text-align: center;"></td> -->
+          <td data-toggle="tooltip" title="Confirm UI elements and Redirection of JioHealth Hub App Tile" 
+            onclick="openInNewTab('log.html#s1-s1-t9','#s1-s1-t9')"
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; cursor: pointer; color:blue; text-align: left;">
+            Confirm UI elements and Redirection of JioHealth Hub App Tile</td>
+          
+          <td style="color: green"> PASS</td>
+          
+          <td>108.7</td>
+          <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;"></td>
+        </tr>
+        
+        <tr>
+          <td class=""
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">[Jiochat]
+          </td>
+          <!-- <td style="word-wrap: break-word;width: 250px; white-space: normal; text-align: center;"></td> -->
+          <td data-toggle="tooltip" title="Confirm UI elements and Redirection of JioChat App Tile" 
+            onclick="openInNewTab('log.html#s1-s1-t10','#s1-s1-t10')"
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; cursor: pointer; color:blue; text-align: left;">
+            Confirm UI elements and Redirection of JioChat App Tile</td>
+          
+          <td style="color: green"> PASS</td>
+          
+          <td>126.11</td>
+          <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;"></td>
+        </tr>
+        
+        <tr>
+          <td class=""
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">[JioMart]
+          </td>
+          <!-- <td style="word-wrap: break-word;width: 250px; white-space: normal; text-align: center;"></td> -->
+          <td data-toggle="tooltip" title="Confirm UI elements and Redirection of JioMart App Tile" 
+            onclick="openInNewTab('log.html#s1-s1-t11','#s1-s1-t11')"
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; cursor: pointer; color:blue; text-align: left;">
+            Confirm UI elements and Redirection of JioMart App Tile</td>
+          
+          <td style="color: red"> FAIL</td>
+          
+          <td>140.52</td>
+          <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">Several failures occurred:
+
+1) Element with locator 'xpath=//div[@class="j-accordion"]//div[@class="j-accordion-panel active"]//span' not found.
+
+2) Element 'xpath://div[@class="j-accordion"]//div[@class="j-accordion-panel active"]//span' not visible after 5 seconds.</td>
+        </tr>
+        
+        <tr>
+          <td class=""
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">[JioCloud]
+          </td>
+          <!-- <td style="word-wrap: break-word;width: 250px; white-space: normal; text-align: center;"></td> -->
+          <td data-toggle="tooltip" title="Confirm UI elements and Redirection of JioCloud App Tile" 
+            onclick="openInNewTab('log.html#s1-s1-t12','#s1-s1-t12')"
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; cursor: pointer; color:blue; text-align: left;">
+            Confirm UI elements and Redirection of JioCloud App Tile</td>
+          
+          <td style="color: green"> PASS</td>
+          
+          <td>145.88</td>
+          <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;"></td>
+        </tr>
+        
+        <tr>
+          <td class=""
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">[JioSecurity]
+          </td>
+          <!-- <td style="word-wrap: break-word;width: 250px; white-space: normal; text-align: center;"></td> -->
+          <td data-toggle="tooltip" title="Confirm UI elements and Redirection of JioSecurity App Tile" 
+            onclick="openInNewTab('log.html#s1-s1-t13','#s1-s1-t13')"
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; cursor: pointer; color:blue; text-align: left;">
+            Confirm UI elements and Redirection of JioSecurity App Tile</td>
+          
+          <td style="color: green"> PASS</td>
+          
+          <td>156.41</td>
+          <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;"></td>
+        </tr>
+        
+        <tr>
+          <td class=""
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">[JioMeet]
+          </td>
+          <!-- <td style="word-wrap: break-word;width: 250px; white-space: normal; text-align: center;"></td> -->
+          <td data-toggle="tooltip" title="Confirm UI elements and Redirection of JioMeet App Tile" 
+            onclick="openInNewTab('log.html#s1-s1-t14','#s1-s1-t14')"
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; cursor: pointer; color:blue; text-align: left;">
+            Confirm UI elements and Redirection of JioMeet App Tile</td>
+          
+          <td style="color: green"> PASS</td>
+          
+          <td>60.57</td>
+          <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;"></td>
+        </tr>
+        
+        <tr>
+          <td class=""
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">[JioCall]
+          </td>
+          <!-- <td style="word-wrap: break-word;width: 250px; white-space: normal; text-align: center;"></td> -->
+          <td data-toggle="tooltip" title="Confirm UI elements and Redirection of JioCall App Tile" 
+            onclick="openInNewTab('log.html#s1-s1-t15','#s1-s1-t15')"
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; cursor: pointer; color:blue; text-align: left;">
+            Confirm UI elements and Redirection of JioCall App Tile</td>
+          
+          <td style="color: red"> FAIL</td>
+          
+          <td>18.87</td>
+          <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">Element 'xpath=//div[@aria-label="JioCall"]//div[@class="j-card__image ratio-wide"]//img' not visible after 5 seconds.</td>
+        </tr>
+        
+        <tr>
+          <td class=""
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">[JioPages]
+          </td>
+          <!-- <td style="word-wrap: break-word;width: 250px; white-space: normal; text-align: center;"></td> -->
+          <td data-toggle="tooltip" title="Confirm UI elements and Redirection of JioPages App Tile" 
+            onclick="openInNewTab('log.html#s1-s1-t16','#s1-s1-t16')"
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; cursor: pointer; color:blue; text-align: left;">
+            Confirm UI elements and Redirection of JioPages App Tile</td>
+          
+          <td style="color: green"> PASS</td>
+          
+          <td>98.29</td>
+          <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;"></td>
+        </tr>
+        
+        <tr>
+          <td class=""
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">[Ent, JioGames]
+          </td>
+          <!-- <td style="word-wrap: break-word;width: 250px; white-space: normal; text-align: center;"></td> -->
+          <td data-toggle="tooltip" title="Confirm UI Functionality of JioGames App" 
+            onclick="openInNewTab('log.html#s1-s1-t17','#s1-s1-t17')"
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; cursor: pointer; color:blue; text-align: left;">
+            Confirm UI Functionality of JioGames App</td>
+          
+          <td style="color: green"> PASS</td>
+          
+          <td>229.1</td>
+          <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;"></td>
+        </tr>
+        
+        <tr>
+          <td class=""
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;">[JioHome]
+          </td>
+          <!-- <td style="word-wrap: break-word;width: 250px; white-space: normal; text-align: center;"></td> -->
+          <td data-toggle="tooltip" title="Confirm UI elements and Redirection of JioHome App Tile" 
+            onclick="openInNewTab('log.html#s1-s1-t18','#s1-s1-t18')"
+            style="word-wrap: break-word;max-width: 250px; white-space: normal; cursor: pointer; color:blue; text-align: left;">
+            Confirm UI elements and Redirection of JioHome App Tile</td>
+          
+          <td style="color: green"> PASS</td>
+          
+          <td>162.41</td>
+          <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align: left;"></td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+
+    <!-- Keyword Average -->
+    <div class="tabcontent" id="keywordMetricsTime">
+      <table id="kmt" class="display tablecard" style="width:100%">
+        <thead>
+          <tr>
+            <th>Keyword Name</th>
+            <th>Times</th>
+            <th>Min Duration(s)</th>
+            <th>Max Duration(s)</th>
+            <th>Average Duration(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.colVis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script>
+    function openPage(pageName, elmnt, color) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].style.color = "";
+      }
+      document.getElementById(pageName).style.display = "block";
+      elmnt.style.color = color;
+
+    }
+    document.getElementById("defaultOpen").click();
+  </script>
+  <script>
+    document.getElementById("defaultOpen").click();
+  </script>
+
+  <script>
+    function executeDataTable(tabname, sortCol) {
+      var fileTitle;
+      switch (tabname) {
+        case "#sm":
+          fileTitle = "Jio.com-Suite Report";
+          break;
+        case "#tm":
+          fileTitle = "Jio.com-Test Report";
+          break;
+        case "#km":
+          fileTitle = "KeywordMetrics";
+          break;
+        default:
+          fileTitle = "Metrics";
+      }
+      $(tabname).DataTable(
+        {
+          retrieve: true,
+          "order": [[Number(sortCol), "desc"]],
+          dom: 'l<".margin" B>frtip',
+          buttons: [
+            {
+              extend: 'copyHtml5',
+              text: '<i class="fa fa-files-o"></i>',
+              filename: function () {
+                return fileTitle + '-' + new Date().toLocaleString();
+              },
+              titleAttr: 'Copy',
+              exportOptions: {
+                columns: ':visible'
+              }
+            },
+            {
+              extend: 'csvHtml5',
+              text: '<i class="fa fa-file-text-o"></i>',
+              titleAttr: 'CSV',
+              filename: function () {
+                return fileTitle + '-' + new Date().toLocaleString();
+              },
+              exportOptions: {
+                columns: ':visible'
+              }
+            },
+            {
+              extend: 'excelHtml5',
+              text: '<i class="fa fa-file-excel-o"></i>',
+              titleAttr: 'Excel',
+              filename: function () {
+                return fileTitle + '-' + new Date().toLocaleString();
+              },
+              exportOptions: {
+                columns: ':visible'
+              }
+            },
+            {
+              extend: 'print',
+              text: '<i class="fa fa-print"></i>',
+              titleAttr: 'Print',
+              exportOptions: {
+                columns: ':visible',
+                alignment: 'left',
+              }
+            },
+            {
+              extend: 'colvis',
+              collectionLayout: 'fixed two-column',
+              text: '<i class="fa fa-low-vision"></i>',
+              titleAttr: 'Hide Column',
+              exportOptions: {
+                columns: ':visible'
+              },
+              postfixButtons: ['colvisRestore']
+            },
+          ],
+          columnDefs: [{
+            visible: false,
+          }]
+        }
+      );
+    }
+    // Change the color of the DataTable pagination text
+  $('.dataTables_info').css('color', 'red');
+
+
+  </script>
+</body>
+<script>
+  window.onload = function () {
+    pieChart('#testPie', "184", "11", "0", 270, "pie");
+
+    
+    console.log({'Name': 'Apps', 'Id': 's1', 'Status': 'FAIL', 'Total': 18, 'Pass': 14, 'Fail': 4, 'Skip': 0, 'Time': 2179647, 'Ratio': 94.36, 'Devops_total': 195, 'Devops_passed': 184, 'Devops_failed': 11, 'Devops_skipped': 0})
+  pieChart("#Apps", "184", "11", "0", 200, "donut", true, true);
+  
+    };
+</script>
+
+<script>
+  function pieChart(chartID, passed, failed, skipped, width, type, total = false, labels = false) {
+    var options = {
+      series: [parseInt(passed), parseInt(failed), parseInt(skipped)],
+      chart: {
+        type: type,
+        width: width,
+      },
+      labels: ['Pass', 'Fail', 'Skip'],
+      dataLabels: {
+        enabled: false
+      },
+      plotOptions: {
+        pie: {
+          donut: {
+            labels: {
+              show: labels,
+              total: {
+                show: total,
+                color: '#000000',
+                formatter: function (w) {
+                  return w.globals.seriesTotals.reduce((a, b) => {
+                    return a + b
+                  }, 0)
+                }
+              }
+            }
+          }
+        }
+      },
+      legend: {
+        show: false,
+      },
+      colors: ['#2ecc71', '#fc6666', '#ffa500'],
+    };
+
+    var chart = new ApexCharts(document.querySelector(chartID), options);
+    chart.render();
+  }
+</script>
+<script>
+  var passArray = [];
+  var failArray = [];
+  var catgArray = [];
+
+  
+  
+  catgArray.push("Apps");
+  passArray.push(22.22);
+  failArray.push(4);
+  
+  
+
+  var options = {
+    series: [{
+      name: 'Fail Percentage',
+      data: passArray,
+      type: "line"
+    }, {
+      name: 'Fail',
+      data: failArray,
+      type: "column"
+    }],
+    chart: {
+      type: 'line',
+      height: 350,
+      // stacked: true,
+    },
+
+    plotOptions: {
+      bar: {
+        dataLabels: {
+          position: 'center',
+          hideOverflowingLabels: true
+        }
+      },
+    },
+    colors: ['#2ecc71', '#fc6666'],
+    xaxis: {
+      categories: catgArray,
+      tickPlacement: 'off',
+      labels: {
+        show: false,
+        trim: true
+      }
+    },
+    yaxis: [{
+      title: {
+        text: 'Suite Fail Percentage',
+      },
+
+    }, {
+      opposite: true,
+      title: {
+        text: 'Suite Fail Count'
+      }
+    }],
+    fill: {
+      opacity: 0.9
+    },
+    tooltip: {
+      y: {
+        formatter: function (val) {
+          return val
+        }
+      },
+      x: {
+        show: true
+      }
+    }
+  };
+
+  var chart = new ApexCharts(document.querySelector("#suiteFailureLineID"), options);
+  chart.render();
+
+</script>
+<script>
+  function openInNewTab(url, element_id) {
+    var element_id = element_id;
+    var win = window.open(url, '_blank');
+    win.focus();
+    $('body').scrollTo(element_id);
+  }
+</script>
+
+<script>
+  $(window).on('load', function () { $('.loader').fadeOut(); });
+</script>
+<script>var dt = new Date(); document.getElementById("datetime").innerHTML = (("0" + dt.getDate()).slice(-2)) + "/" + (("0" + (dt.getMonth() + 1)).slice(-2)) + "/" + (dt.getFullYear()) + " " + (("0" + dt.getHours()).slice(-2)) + ":" + (("0" + dt.getMinutes()).slice(-2));</script>
+
+</html>
