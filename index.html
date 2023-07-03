@@ -152,6 +152,100 @@
       float: right;
       padding-right: 8px;
     }
+
+
+    .calendar-icon {
+      position:absolute;
+      top: 56px;
+      left: 90px;
+      width: 40px;
+      height: 40px;
+      /* background-color: #333; */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 999;
+
+    }
+
+    .calendar-icon:before {
+      content: "\1F4C5";
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.4s;
+      z-index: 998;
+    }
+
+    .menu.open {
+      opacity: 1;
+      visibility: visible;
+      
+      
+    }
+
+    .menu-content {
+      width: 300px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      position: relative; 
+     
+    }
+
+    .date-input-wrapper {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .calendar-icon-menu {
+      margin-right: 10px;
+      cursor: pointer;
+      font-size: 20px;
+      color: #007bff;
+    }
+
+    .close-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 24px;
+      height: 24px;
+      background-color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+
+    .close-icon:before {
+      content: "\2716";
+      font-size: 14px;
+      color: #fff;
+    }
+
+    #message {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    
   </style>
 </head>
 
@@ -166,23 +260,55 @@
   <div id="mySidenav" class="menu-container">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="#" target="_blank">Jio.com</a>
-    <button class="dropdown-btn">Weekly reports >
+
+    <div class="calendar-icon" onclick="toggleMenu()"></div>
+
+  <div class="menu" id="menu">
+    <div class="menu-content">
+      <div class="close-icon" onclick="toggleMenu()"></div>
+      <h1>Select a Date</h1>
+      <div class="date-input-wrapper" id="dateInputWrapper" style="display: none;">
+        <span class="calendar-icon-menu" onclick="showDatePicker()">&#128197;</span>
+        <input type="date" id="date" name="date">
+      </div>
+      <div id="message"></div>
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      var menu = document.getElementById('menu');
+      menu.classList.toggle('open');
+
+      var dateInputWrapper = document.getElementById('dateInputWrapper');
+      dateInputWrapper.style.display = menu.classList.contains('open') ? 'flex' : 'none';
+    }
+
+    function showDatePicker() {
+      var dateInput = document.getElementById('date');
+      dateInput.style.display = 'block';
+    }
+
+    
+
+  
+  </script>
+
+    <!-- <button class="dropdown-btn">Weekly reports > -->
       <i class="fa fa-caret-down"></i>
     </button>
-    <div class="dropdown-container">
+    <!-- <div class="dropdown-container">
       <a href="Reports\26-06-2023\Final-Report.html" target="_blank">26-06-2023</a>
       <a href="Reports\27-06-2023\Final-Report.html" target="_blank">27-06-2023</a>
       <a href="Reports\28-06-2023\Jio.com_metrics-report28th-June.html" target="_blank">28-06-2023</a>
       <a href="#" target="_blank">29-06-2023</a>
       <a href="#" target="_blank">30-06-2023</a>
-    </div>
+    </div> -->
     <a href="#" >Jio Games</a>
     <a href="#" >DAM</a>
     <a href="#" >MP Corner</a>
     <a href="#" >My Jio</a>
   </div>
-
-
 
   <!-- Hamburger menu button -->
   <span style="font-size:30px;cursor:pointer" class="hamburger" onclick="openNav()">&#9776;</span>
@@ -196,7 +322,7 @@
     </div>
     <div class="slide">
       <img src="https://linkconsulting.com/wp-content/uploads/2019/05/img-RPA-1.jpg"
-        style="height:70%;width:105%;object-fit: cover;" alt="robot">
+        style="height:600px;width:105%;object-fit: cover;" alt="robot">
     </div>
     <div class="slide">
       <img src="https://i.pinimg.com/originals/fb/07/0a/fb070abd9f4a4af3935b5a33df0e0f9a.jpg"
@@ -320,6 +446,9 @@
         });
       });
     </script>
+
+
+
 
     <script>
 
