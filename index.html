@@ -289,7 +289,39 @@
       dateInput.style.display = 'block';
     }
 
-    
+    var dateInput = document.getElementById('date');
+
+    dateInput.addEventListener('change', function(event) {
+
+      var selectedDate = dateInput.value;
+
+      var redirectURLs = {
+
+        '2023-06-26': 'Reports/26-06-2023/Final-Report.html',
+
+        '2023-06-27': 'Reports/27-06-2023/Final-Report.html',
+
+        '2023-06-28': 'Reports/28-06-2023/Final-Report.html',
+
+      };
+
+     
+
+      if (selectedDate in redirectURLs) {
+
+        var url = redirectURLs[selectedDate];
+
+        window.location.href = url;
+
+      } else {
+
+        var message = document.getElementById('message');
+
+        message.textContent = 'No data available for the selected date.';
+
+      }
+
+    });
 
   
   </script>
@@ -493,6 +525,7 @@
           }
         });
       }
+
     </script>
 
   </body>
